@@ -1,9 +1,7 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.io.*;
+import java.util.*;
 
-public class PriceMap {
+public class PriceMap implements Serializable {
     private  Map<String,Integer> priceOfType = new TreeMap<>();
 
     public Map<String, Integer> getPriceOfType() {
@@ -34,4 +32,6 @@ public class PriceMap {
     public void setPriceOfType(String type){
 
     }
+
+
 }

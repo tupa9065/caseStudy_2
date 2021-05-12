@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Vehicle {
+public class Vehicle implements Serializable {
     private String numOfVehicle;
     private String type;
     private String dateSwash;

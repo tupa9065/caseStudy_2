@@ -11,6 +11,7 @@ public class CarWashThread extends Thread {
     public void run() {
         while (!VehicleQueue.queue.isEmpty()) {
             Vehicle vehicle = VehicleQueue.pollQueue();
+            VehicleWash.addData(vehicle);
             wash(vehicle);
         }
         suspend();
@@ -24,13 +25,13 @@ public class CarWashThread extends Thread {
                 System.err.println(Thread.currentThread().getName()+" bắt đầu rửa xe "+vehicle.getNumOfVehicle());
                 long timeWash = vehicle.getPrice();
                 try {
-                    Thread.sleep(2000 * timeWash);
+                    Thread.sleep(1000 * timeWash);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.err.println(Thread.currentThread().getName()+" đã rửa xong xe "+vehicle.getNumOfVehicle());
-
                 VehicleList.addData(vehicle);
+                VehicleWash.deleteVehicle(vehicle);
             }
 
 
