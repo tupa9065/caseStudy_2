@@ -1,9 +1,14 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args) {
@@ -101,8 +106,22 @@ public class Main {
                     showList(newList);
                 }
                     break;
-                case "3":
-                    System.out.println("chức năng đang được xây dụng");
+                case "3":{
+                    System.out.println("Nhập ngày bất đầu (YYYY-MM-DD)");
+                    String fromTimeStr = scanner.nextLine();
+                    LocalDate fromTimeDate = LocalDate.parse(fromTimeStr);
+                    System.out.println("Nhập ngày kết thúc (YYYY-MM-DD)");
+                    String toTimeStr = scanner.nextLine();
+                    LocalDate toTimeDate = LocalDate.parse(toTimeStr);
+                    ArrayList<Vehicle> newList = getSetTimeVehicleList(fromTimeDate,toTimeDate);
+                    int total = revenue(newList);
+                    System.out.println("Doanh thu từ " +fromTimeStr+" đến "+toTimeStr+" là: "+total +".000 VNĐ");
+                    showList(newList);
+
+                }
+
+
+
                     break;
                 case "4": {
                     int total = revenue(VehicleList.list);
@@ -118,6 +137,20 @@ public class Main {
             }
         }while (!(choice.equals("5")));
     }
+
+    private static ArrayList<Vehicle> getSetTimeVehicleList(LocalDate fromTime,LocalDate toTime) {
+        ArrayList<Vehicle> setTimeList = new ArrayList<>();
+        fromTime=fromTime.minusDays(1);
+        toTime = toTime.plusDays(1);
+        for (Vehicle vehicle :VehicleList.list) {
+            LocalDate vehicleDate = LocalDate.parse(vehicle.getDateSwash());
+            if(vehicleDate.isAfter(fromTime)&&vehicleDate.isBefore(toTime)){
+                setTimeList.add(vehicle);
+            }
+        }
+        return setTimeList;
+    }
+
 
     private static ArrayList<Vehicle> getDayVehicleList() {
         ArrayList<Vehicle> dayList = new ArrayList<>();
