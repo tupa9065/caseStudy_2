@@ -53,7 +53,6 @@ public class Main {
 
                 case "5":
                     salesReportMenu();
-                    //System.out.println("chức năng chưa hoàn thiện");
                     break;
 
                 case "6":
@@ -107,21 +106,21 @@ public class Main {
                 }
                     break;
                 case "3":{
-                    System.out.println("Nhập ngày bất đầu (YYYY-MM-DD)");
-                    String fromTimeStr = scanner.nextLine();
-                    LocalDate fromTimeDate = LocalDate.parse(fromTimeStr);
-                    System.out.println("Nhập ngày kết thúc (YYYY-MM-DD)");
-                    String toTimeStr = scanner.nextLine();
-                    LocalDate toTimeDate = LocalDate.parse(toTimeStr);
-                    ArrayList<Vehicle> newList = getSetTimeVehicleList(fromTimeDate,toTimeDate);
-                    int total = revenue(newList);
-                    System.out.println("Doanh thu từ " +fromTimeStr+" đến "+toTimeStr+" là: "+total +".000 VNĐ");
-                    showList(newList);
-
+                    try{
+                        System.out.println("Nhập ngày bất đầu (YYYY-MM-DD)");
+                        String fromTimeStr = scanner.nextLine();
+                        LocalDate fromTimeDate = LocalDate.parse(fromTimeStr);
+                        System.out.println("Nhập ngày kết thúc (YYYY-MM-DD)");
+                        String toTimeStr = scanner.nextLine();
+                        LocalDate toTimeDate = LocalDate.parse(toTimeStr);
+                        ArrayList<Vehicle> newList = getSetTimeVehicleList(fromTimeDate,toTimeDate);
+                        int total = revenue(newList);
+                        System.out.println("Doanh thu từ " +fromTimeStr+" đến "+toTimeStr+" là: "+total +".000 VNĐ");
+                        showList(newList);
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
                 }
-
-
-
                     break;
                 case "4": {
                     int total = revenue(VehicleList.list);
